@@ -10,13 +10,54 @@ import itertools
 #  put components on the right side of the board
 #  run this script
 
+start = 123456789
+seeds = []
+
 def main(**kwargs):
+    global seeds, start
+
+    files_delete = False
+    kwargs['files_delete'] = files_delete
+
+
+    #se t seeds
+    seeds = []
+    #seeds.append(12569868)
     
+    number_of_seeds = 10
+    for i in range(number_of_seeds):
+        seeds.append(start + i)
+
     make_readme(**kwargs)
     make_grid_file(**kwargs)
+    copy_files(**kwargs)
+
+def copy_files(**kwargs):   
+    global seeds
+    pass
+    dir_image_base = f"C:/sd2/webui/outputs/txt2img-grids/working_grid_output"
+    dir_image_prefix = f"default/"
+    dir_image_suffix = "/euler_a/model_sdxl/10241024/steps_51/cfg_11/kawaii_craft_clay_pop_art/no_artist/no_extra/logo_1/weight_1.png"
+
+    for seed in seeds:
+        dir_image_generated = f"generated/{seed}"
+        file_image_generated = f"{dir_image_generated}/logo.png"
+        file_source = f"{dir_image_base}/{dir_image_prefix}{seed}{dir_image_suffix}"
+        file_destination = file_image_generated
+        
+        os.makedirs(dir_image_generated, exist_ok=True)
+        if os.path.exists(file_source):
+            print(f"copying file: {file_source} to {file_destination}")
+            shutil.copyfile(file_source, file_destination)
+        else:
+            print(f"file not found: {file_source}")
 
 
 def make_grid_file(**kwargs):
+    global seeds
+
+    files_delete = kwargs.get('files_delete', False)
+    
     file_grid_source = "working_grid_source.yml"
     file_grid_output = "working_grid_output.yml"
 
@@ -25,12 +66,7 @@ def make_grid_file(**kwargs):
     with open(file_grid_source) as f:
         grid_source = yaml.load(f, Loader=yaml.FullLoader)
 
-    seeds = []
-    #seeds.append(12569868)
-    start = 987600000
-    number_of_seeds = 10
-    for i in range(number_of_seeds):
-        seeds.append(start + i)
+    
     for seed in seeds:
         new = {}
         new['title'] = f"{seed}"
@@ -74,12 +110,13 @@ def make_grid_file(**kwargs):
 
     pass
     
-    # delete images
-    print(f"deleting images")
-    dir_images = rf"C:\sd2\webui\outputs\txt2img-grids\working_grid_output\default"
-    #delete directory and all files in it
-    if os.path.exists(dir_images):
-        shutil.rmtree(dir_images)
+    if files_delete:
+        # delete images
+        print(f"deleting images")
+        dir_images = rf"C:\sd2\webui\outputs\txt2img-grids\working_grid_output\default"
+        #delete directory and all files in it
+        if os.path.exists(dir_images):
+            shutil.rmtree(dir_images)
     
     
 

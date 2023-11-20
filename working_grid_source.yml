@@ -1,0 +1,140 @@
+grid:
+  title: grid_1_style_and_artist_squares
+  description: ''
+  format: jpeg
+  author: Unspecified  
+  
+axes:
+  prompt:
+    title: prompt
+    description: prompt
+    values: 
+      default:
+        title: default
+        params:
+          prompt: no prompt no artist no style no extra
+  seed:
+    title: seed
+    description: seed
+    values:
+      "2971900032":
+        title: "2971900032"
+        params:
+          seed: "2971900032"
+  sampler:
+    title: sampler
+    description: sampler
+    values:
+      # dpm_plus_plus_2m_karras:
+      #   title: dpm_plus_plus_2m_karras
+      #   params:
+      #     sampler: DPM++ 2M Karras
+      euler_a:
+        title: euler_a
+        params:
+          sampler: Euler A
+  model:
+    title: model
+    description: model
+    values:
+      model_sdxl:
+        title: model_sdxl
+        params:
+          model: sd_xl_base_1.0_0.9vae.safetensors
+  dimensions:      
+    title: dimensions
+    description: dimensions
+    values:
+      1024_1024:
+        title: 1024_1024
+        params:
+          width: "1024"
+          height: "1024"
+  steps:
+    title: steps
+    description: steps
+    values:
+      # steps_1:
+      #   title: "1"
+      #   params:
+    #   #   steps: 1
+     steps_20:
+       title: "20"
+       params:
+         steps: 20
+     steps_30:
+       title: "30"
+       params:
+         steps: 30
+     steps_51:
+       title: "51"
+       params:
+         steps: 51        
+  scale:
+    title: scale
+    description: scale
+    values:
+      cfg_11:
+        title: cfg_11
+        params:
+          cfg scale: "11"
+      
+      cfg_7:
+        title: cfg_7
+        params:
+          cfg scale: "7"
+  style:
+    title: style
+    description: style
+    values:
+      no_style:
+        title: no_style
+        params:
+          promptreplace: no style=
+  artist:
+      title: artist
+      description: artist
+      values:
+        no_artist:
+          title: no_artist
+          params:
+            promptreplace: no artist=            
+  extra:
+    title: extra
+    description: extra
+    values:
+      no_extra:
+        title: no_extra
+        params:
+          promptreplace: no extra=
+  prompt_:
+      title: prompt
+      description: prompt
+      values:
+        logo_1:
+           title: logo_1
+           params:
+            promptreplace: no prompt=a kids coloring sheet of a, cartoon a fuzzy cute (machine screw with hex head and nut with a big smile on its face:1.5), (line drawing:line_weight), black and white, plain white background
+            negativeprompt: dog, grey, shaded, texture
+  line_weight:
+    title: line_weight
+    description: line_weight
+    values:
+      weight_1:
+        title: 1
+        params:
+          promptreplace: line_weight=1
+      weight_1d1:
+        title: 1.1
+        params:
+          promptreplace: line_weight=1.1
+      weight_1d5:
+        title: 1.5
+        params:
+          promptreplace: line_weight=1.5
+      weight_2:
+        title: 2
+        params:
+          promptreplace: line_weight=2  
+      
+

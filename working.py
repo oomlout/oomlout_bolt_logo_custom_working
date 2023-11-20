@@ -3,6 +3,7 @@ import os
 import yaml
 import shutil
 import itertools
+import oom_base
 
 #process
 #  locations set in working_parts.ods 
@@ -31,6 +32,8 @@ def main(**kwargs):
     make_readme(**kwargs)
     make_grid_file(**kwargs)
     copy_files(**kwargs)
+    make_yaml(**kwargs)
+    make_label(**kwargs)
 
 def copy_files(**kwargs):   
     global seeds
@@ -132,11 +135,43 @@ def make_grid_file(**kwargs):
     file_dst = rf"C:\sd2\webui\extensions\sd-infinity-grid-generator-script\assets\{file_grid_output}"
     shutil.copyfile(file_src, file_dst)
 
+def make_label(**kwargs):
+    global seeds
+    for seed in seeds:
+        dir_label = f"generated/{seed}"
+        file_label = f"generated/{seed}/label.svg"
+        file_template = f"templates/template_label_logo_150_mm_100_mm.svg"
+        #load working.yaml from dir_label
+        file_yaml = f"generated/{seed}/working.yaml"
+        print(f"loading in file: {file_yaml}")
+        with open(file_yaml) as f:
+            yaml_deets = yaml.load(f, Loader=yaml.FullLoader)
+        
+        dict_data = yaml_deets
+        file_template = file_template
+        file_output = file_label
+        oom_base.get_jinja2_template(dict_data=dict_data, file_template=file_template, file_output=file_output)
+        file_input = file_label        
+        oom_base.convert_svg_to_pdf(file_input=file_input)
+        
+        
+
 def make_readme(**kwargs):
     os.system("generate_resolution.bat")
     #oom_markdown.generate_readme_project(**kwargs)
     oom_markdown.generate_readme_teardown(**kwargs)
     
+def make_yaml(**kwargs):
+    global seeds
+    for seed in seeds:
+        yaml_deets = {}
+        yaml_deets['seed'] = seed
+        yaml_deets['order_number'] = seed
+        #dump to working.yaml in generated directory
+        file_yaml = f"generated/{seed}/working.yaml"
+        print(f"writing out file: {file_yaml}")
+        with open(file_yaml, 'w') as f:            
+            yaml.dump(yaml_deets, f, sort_keys=False)
 
 if __name__ == '__main__':
     main()

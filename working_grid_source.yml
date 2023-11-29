@@ -58,14 +58,14 @@ axes:
       #   title: "1"
       #   params:
     #   #   steps: 1
-     steps_20:
-       title: "20"
-       params:
-         steps: 20
-     steps_30:
-       title: "30"
-       params:
-         steps: 30
+    #  steps_20:
+    #    title: "20"
+    #    params:
+    #      steps: 20
+    #  steps_30:
+    #    title: "30"
+    #    params:
+    #      steps: 30
      steps_51:
        title: "51"
        params:
@@ -79,18 +79,15 @@ axes:
         params:
           cfg scale: "11"
       
-      cfg_7:
-        title: cfg_7
-        params:
-          cfg scale: "7"
+      # cfg_7:
+      #   title: cfg_7
+      #   params:
+      #     cfg scale: "7"
   style:
     title: style
     description: style
     values:
-      no_style:
-        title: no_style
-        params:
-          promptreplace: no style=
+      
   artist:
       title: artist
       description: artist
@@ -120,21 +117,21 @@ axes:
     title: line_weight
     description: line_weight
     values:
-      weight_1:
-        title: 1
-        params:
-          promptreplace: line_weight=1
-      weight_1d1:
-        title: 1.1
-        params:
-          promptreplace: line_weight=1.1
+    #   weight_1:
+    #     title: 1
+    #     params:
+    #       promptreplace: line_weight=1
+    #   weight_1d1:
+    #     title: 1.1
+    #     params:
+    #       promptreplace: line_weight=1.1
       weight_1d5:
         title: 1.5
         params:
           promptreplace: line_weight=1.5
-      weight_2:
-        title: 2
-        params:
-          promptreplace: line_weight=2  
+      # weight_2:
+      #   title: 2
+      #   params:
+      #     promptreplace: line_weight=2  
       
 

@@ -25,25 +25,28 @@ def main(**kwargs):
     seeds = []
     #seeds.append(12569868)
     
-    number_of_seeds = 10
+    number_of_seeds = 500
     for i in range(number_of_seeds):
         seeds.append(start + i)
 
-    make_readme(**kwargs)
-    make_grid_file(**kwargs)
+    #make_readme(**kwargs)
+    #make_grid_file(**kwargs)
     copy_files(**kwargs)
-    make_yaml(**kwargs)
-    make_label(**kwargs)
+    #make_yaml(**kwargs)
+    #make_label(**kwargs)
 
 def copy_files(**kwargs):   
     global seeds
     pass
     dir_image_base = f"C:/sd2/webui/outputs/txt2img-grids/working_grid_output"
     dir_image_prefix = f"default/"
-    dir_image_suffix = "/euler_a/model_sdxl/10241024/steps_51/cfg_11/kawaii_craft_clay_pop_art/no_artist/no_extra/logo_1/weight_1.png"
+    dir_image_suffix = "/euler_a/model_sdxl/10241024/steps_51/cfg_11/kawaii_craft_clay/no_artist/no_extra/logo_1/weight_1d5.png"
 
     for seed in seeds:
-        dir_image_generated = f"generated/{seed}"
+        #for keeping them not synced
+        #dir_image_generated = f"generated/{seed}"
+        #putting on github
+        dir_image_generated = f"logos/{seed}"
         file_image_generated = f"{dir_image_generated}/logo.png"
         file_source = f"{dir_image_base}/{dir_image_prefix}{seed}{dir_image_suffix}"
         file_destination = file_image_generated
@@ -86,7 +89,8 @@ def make_grid_file(**kwargs):
     #styles_raw = ["lowpoly","origami","anime","craft clay","isometric","grafitti","pop art","kawaii"]
     #styles_raw = ["kawaii","craft clay","low_poly","pop art"]
     
-    styles_raw = ["lowpoly kawaii", "kawaii craft clay","kawaii craft clay pop art"]
+    #styles_raw = ["lowpoly kawaii", "kawaii craft clay","kawaii craft clay pop art"]
+    styles_raw = ["kawaii craft clay"]
     permutations = False
 
 
@@ -109,6 +113,10 @@ def make_grid_file(**kwargs):
         new['title'] = f"{str(style)}"
         new["params"] = {}
         new['params']["promptreplace"] = f"no style={str(style)}"
+        if grid_source["axes"]['style'] == None:
+            grid_source["axes"]['style'] = {}
+        if grid_source["axes"]['style'].get("values",None) == None:
+            grid_source["axes"]['style']["values"] = {}
         grid_source["axes"]['style']["values"][style] = new
 
     pass
